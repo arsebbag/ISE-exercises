@@ -19,44 +19,55 @@ router.post("/", async (req, res) => {
         })
         let password = req.body.password;
         let username = req.body.username;
-        //let rule = user1.rule;
-        //console.log(username);
+
+        console.log(user1);
 
         if (user1.name == username && user1.password == password) {
-            console.log(user1.name);
-
+            let rule = user1.rule;
             const obj = {}
-            let reqPath = path.join(__dirname, '../');
+            const reqPath = path.join(__dirname, '../');
             console.log(reqPath);
-            const html = fs.readFileSync(path.join(reqPath + "/views/admin.html"));
-            return res.json({ html: html.toString(), data: obj });
+            // const html = fs.readFileSync(path.join(reqPath + "/views/admin.html"));
+            // return res.json({ html: html.toString(), data: obj });
 
-            // if (rule == "admin") {
-            //     console.log(dirViews);
-            //     res.sendFile(path.join("C:\\ISE-Summer\\FlowerShopWebsite-main\\FlowerShopWebsite-main/views" + "/admin.html"));
-            // }
-            // else if (rule == "employee") {
-            //     console.log("em");
-            //     res.sendFile(path.join(dirViews + "/employee.html"));
-            // }
-            // else if (rule == "customer") {
-            //     console.log("cus");
-            //     res.sendFile(path.join(dirViews + "/customer.html"));
-            // }
-            // else if (rule == "Vendor") {
-            //     console.log("ve");
-            //     res.sendFile(path.join(dirViews + "/vendor.html"));
-            // }
-            // return;
-            // //  }
+            if (rule == "admin") {
+                let html = fs.readFileSync(path.join(reqPath + "/views/admin.html"));
+                return res.json({ html: html.toString(), data: obj });
+            }
+            else if (rule == "employee") {
+                let html = fs.readFileSync(path.join(reqPath + "/views/employee.html"));
+                return res.json({ html: html.toString(), data: obj });
+            }
+            else if (rule == "customer") {
+                let html = fs.readFileSync(path.join(reqPath + "/views/customer.html"));
+                return res.json({ html: html.toString(), data: obj });
+            }
+            else if (rule == "Vendor") {
+                let html = fs.readFileSync(path.join(reqPath + "/views/vendor.html"));
+                return res.json({ html: html.toString(), data: obj });
+            }
+            //  }
         }
     }
-    else
-        return res.status(422).json({ success: false, message: "You sent a bad entity or crednials are incorrect." })
+    return res.status(422).json({ success: false, message: "You sent a bad entity or crednials are incorrect." })
     // add user and create cookie for user and send it back.
 })
 
+router.get("/logout", async (req, res) => {
+    const obj = {}
+    let reqPath = path.join(__dirname, '../');
+    console.log(reqPath);
+    const html = fs.readFileSync(path.join(reqPath + "/views/index.html"));
+    return res.json({ html: html.toString(), data: obj });
+})
 module.exports = router;
+
+
+
+
+
+
+
 
 // in user.json
 

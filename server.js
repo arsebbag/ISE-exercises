@@ -8,6 +8,7 @@ var logger = require('morgan');
 const app = express();
 const router = express.Router();
 
+//Favicon
 var favicon = require('serve-favicon')
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 

@@ -171,8 +171,21 @@
         function w3_close() {
           document.getElementById("mySidebar").style.display = "none";
         }
-        function logout() {
-          location.replace('/index.html')
+        async function logout() {
+          let response = await fetch('/auth/logout').then(
+            (response) => {
+              if (response.status != 404) {
+                let res = response.json().then((messages) => {
+                  let msg = messages.html
+                  console.log(msg);
+                  document.open()
+                  document.write(msg)
+                  document.close()
+
+                });
+              }
+            })
+
         }
 
       </script>
