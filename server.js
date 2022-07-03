@@ -42,9 +42,7 @@ setRouter("/user", './routes/users');
 setRouter("/findMe", './routes/users');
 setRouter("/login/:user/:password", './routes/users');// check if its good
 setRouter("/users/:username/:password", './routes/users');// check if its good
-
-setRouter("/addUser /: username /: password /: rule /: newPassword /: newUsername", './routes/users');// check if its good
-setRouter("/removeUser/:username/:password/:Username", './routes/users');// check if its good
+setRouter("/upload", "./routes/upload")
 
 router.get('logout', (req, res) => {
   path.join(dirViews + '/index.html')

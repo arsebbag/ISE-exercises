@@ -109,6 +109,13 @@
         </div>
       </div>
 
+      <!-- Add files to the page -->
+      <form class="w3-container w3-padding-32 w3-center" id="uploadForm" enctype="multipart/form-data" action="/upload"
+        method="post">
+        <input type="file" id="file" name="file" />
+        <input type="submit" value="Upload" id="upBtn" name="submit">
+      </form>
+
       <hr id="About">
       <br>
       <!-- About Section -->
@@ -171,6 +178,7 @@
         function w3_close() {
           document.getElementById("mySidebar").style.display = "none";
         }
+        // logout the user session
         async function logout() {
           let response = await fetch('/auth/logout').then(
             (response) => {
@@ -187,6 +195,35 @@
             })
 
         }
+
+        //for upload 
+        $(() => {
+          let form = $("#uploadForm");
+          form.submit(async event => {
+            let btn = $("#upBtn");
+            event.preventDefault();
+            btn.val("...");
+            // Get the selected files from the input.
+            let file = $('#file').get(0).files[0];
+            if (file) {
+              try {
+                let resp = await fetch(form.attr("action"),
+                  {
+                    method: 'POST',
+                    headers: { "X_FILENAME": file.name },
+                    body: file
+                  });
+                resp = await resp.text();
+                console.log("File uploaded: " + resp);
+                btn.val("Upload");
+              } catch (err) {
+                console.log('Error uploading file: ' + err);
+                btn.val("Upload");
+              }
+            } else
+              btn.val("Upload");
+          });
+        });
 
       </script>
 

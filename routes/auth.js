@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const path = require('path');
-var users = require("../jsons/users.json")
 userModel = require('../models/users');
 const fs = require('fs');
 
